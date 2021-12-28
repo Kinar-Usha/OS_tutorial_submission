@@ -1,7 +1,5 @@
 #[path = "input_int.rs"] mod input_int;
-// use std::io::Write;
 const ARRAY_LENGTH:usize =20;
-// use std::collections::HashSet;
 use std::collections::HashMap;
 use std::collections::BTreeSet;
 fn print_set(s:&BTreeSet<u32>){
@@ -11,7 +9,6 @@ fn print_set(s:&BTreeSet<u32>){
     println!("");
 }
 fn page_replacement(pages:&mut [u32], num_of_pages:usize, num_of_frames:usize) {
-    // let mut set: HashSet<u32> = HashSet::new();
     let mut set = BTreeSet::new();
     let mut indexes: HashMap<u32, u32> = HashMap::new();
     let mut page_hit:u32 =0;
