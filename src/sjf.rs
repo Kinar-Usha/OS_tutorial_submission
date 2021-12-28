@@ -26,12 +26,20 @@ pub fn sort_arrival(ar: &mut Vec<ProcessTable>) {
 }
 pub fn print_sjf(ar: &mut Vec<ProcessTable>) {
     println!("processID| Arrival Time | Burst time\t| Completion time | turn around time\t| waiting time");
+    let mut avg_tat:u32 = 0;
+    let mut avg_wt:u32 = 0;
     for i in 0..N {
+        avg_tat+=ar[i].tat;
+        avg_wt+=ar[i].wt;
+        
         println!(
             "{}\t |\t{}\t|\t{}\t| \t{}\t  | \t{}\t\t|\t{}",
             ar[i].id, ar[i].at, ar[i].bt, ar[i].ct, ar[i].tat, ar[i].wt
         );
     }
+    avg_tat/=N as u32;
+    avg_wt/=N as u32;
+    println!("Average turn around time = {}\nAverage waiting time = {}",avg_tat,avg_wt);
 }
 
 pub fn completion_time(vector: &mut Vec<ProcessTable>) {
