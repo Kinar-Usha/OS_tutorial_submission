@@ -1,4 +1,5 @@
-#[path = "input_int.rs"] mod input_int;
+#[path = "input_int.rs"]
+mod input_int;
 const N: usize = 5;
 
 pub struct ProcessTable {
@@ -10,6 +11,9 @@ pub struct ProcessTable {
     wt: u32,
 }
 pub fn sort_arrival(ar: &mut Vec<ProcessTable>) {
+    /*
+        function to sort the vector of processes based on arrival time
+    */
     for i in 0..N {
         for j in 0..N - i - 1 {
             if ar[j].at > ar[j + 1].at {
@@ -26,23 +30,32 @@ pub fn sort_arrival(ar: &mut Vec<ProcessTable>) {
 }
 pub fn print_sjf(ar: &mut Vec<ProcessTable>) {
     println!("processID| Arrival Time | Burst time\t| Completion time | turn around time\t| waiting time");
-    let mut avg_tat:u32 = 0;
-    let mut avg_wt:u32 = 0;
+    let mut avg_tat: f64 = 0.0;
+    let mut avg_wt: f64 = 0.0;
     for i in 0..N {
-        avg_tat+=ar[i].tat;
-        avg_wt+=ar[i].wt;
-        
+        avg_tat += f64::from(ar[i].tat);
+        avg_wt += f64::from(ar[i].wt);
+
         println!(
             "{}\t |\t{}\t|\t{}\t| \t{}\t  | \t{}\t\t|\t{}",
             ar[i].id, ar[i].at, ar[i].bt, ar[i].ct, ar[i].tat, ar[i].wt
         );
     }
-    avg_tat/=N as u32;
-    avg_wt/=N as u32;
-    println!("Average turn around time = {}\nAverage waiting time = {}",avg_tat,avg_wt);
+    avg_tat /= N as f64;
+    avg_wt /= N as f64;
+    println!(
+        "Average turn around time = {}\nAverage waiting time = {}",
+        avg_tat, avg_wt
+    );
 }
 
-pub fn completion_time(vector: &mut Vec<ProcessTable>) {
+pub fn process_scheduler(vector: &mut Vec<ProcessTable>) {
+    /*
+        Using the sorted Vector of processes check if previous process's completion time
+        is greater than all other processe's arrival time and check the burst time of the
+        process with all other processes to be scheduled
+    */
+
     let mut temp: u32;
     vector[0].ct = vector[0].at + vector[0].bt;
     vector[0].tat = vector[0].ct - vector[0].at;
@@ -65,7 +78,7 @@ pub fn completion_time(vector: &mut Vec<ProcessTable>) {
         vector.swap(val, i);
     }
 }
-pub fn run_sjf(){
+pub fn run_sjf() {
     println!("The number of processes: {}", N);
     let mut process_vector_table: Vec<ProcessTable> = Vec::with_capacity(N);
     for _ in 0..N {
@@ -85,8 +98,6 @@ pub fn run_sjf(){
         });
     }
     sort_arrival(&mut process_vector_table);
+    process_scheduler(&mut process_vector_table);
     print_sjf(&mut process_vector_table);
-    completion_time(&mut process_vector_table);
-    print_sjf(&mut process_vector_table);
-
 }
