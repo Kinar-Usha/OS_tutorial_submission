@@ -7,5 +7,5 @@
 2. run `cargo run`
 
 
-#OS TUTORIAL
+## OS TUTORIAL
 The repository contains SJF and LRU algorithms
