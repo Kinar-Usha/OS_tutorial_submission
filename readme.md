@@ -8,4 +8,4 @@
 
 
 #OS TUTORIAL
-The repository contains SJF and LRU
+The repository contains SJF and LRU algorithms
