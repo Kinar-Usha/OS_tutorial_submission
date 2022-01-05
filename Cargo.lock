@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "os_algo"
+name = "os_tutorial_submission"
 version = "0.1.0"
